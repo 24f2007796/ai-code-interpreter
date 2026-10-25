@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: a2a-invoice-action-agent
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /health
+    disk:
+      name: invoice-agent-state
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATABASE_PATH
+        value: /var/data/invoice_agent.db
+      - key: AI_MODEL
+        value: gpt-4o-mini
+      - key: AI_BASE_URL
+        value: https://api.openai.com/v1
+      - key: AI_API_KEY
+        sync: false
+      - key: A2A_BASE_URL
+        sync: false

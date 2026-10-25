@@ -1,0 +1,9 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+invoice_agent.db
+*.sqlite
+*.sqlite3
+.env.*
